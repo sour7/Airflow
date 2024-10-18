@@ -1,0 +1,6 @@
+[2024-10-18T12:06:02.468+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-18T12:06:02.656+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: our_first_dag.this_is_1st_task scheduled__2023-08-05T00:00:00+00:00 [queued]>
+[2024-10-18T12:06:02.719+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: our_first_dag.this_is_1st_task scheduled__2023-08-05T00:00:00+00:00 [queued]>
+[2024-10-18T12:06:02.731+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 2
+[2024-10-18T12:06:02.815+0000] {local_task_job_runner.py:127} ERROR - Received SIGTERM. Terminating subprocesses
+[2024-10-18T12:06:02.849+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 143
