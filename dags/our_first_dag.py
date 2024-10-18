@@ -11,7 +11,7 @@ default_args = {
 with DAG(
     dag_id="our_first_dag",  # unique dag id
     default_args=default_args,
-    description="this is first dag",
+    description="this is first dag v2",
     start_date=datetime(2021, 7, 29, 2, 2),  # dag start time at 29/07/2021 at 2 AM
     schedule_interval='@daily'  # frequency of task execution
 ) as dag:
@@ -19,3 +19,9 @@ with DAG(
         task_id='this_is_1st_task',
         bash_command="echo Hello world, this is my first task"
     )
+    task2 = BashOperator(
+        task_id='this_is_2nd_task',
+        bash_command="echo Hello world, this is my second task and will run after task one "
+    )
+    task1.set_downstream(task2)
+
