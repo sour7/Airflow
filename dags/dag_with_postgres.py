@@ -9,9 +9,9 @@ default_args = {
 }
 
 with DAG(
-    dag_id="dag_with_postgres_v02",
+    dag_id="dag_with_postgres_v555",
     default_args=default_args,
-    start_date=datetime(2024, 10, 1),
+    start_date=datetime(2024, 10, 10),
     schedule_interval='0 0 * * *',  # Daily at midnight
 ) as dag:
     task1 = PostgresOperator(
@@ -29,7 +29,10 @@ with DAG(
         task_id='insert_data_postgres_table',
         postgres_conn_id='postgres_localhost',
         sql="""
-            INSERT INTO dag_runs (dt, dag_id) VALUES ('{{ ds }}', '{{ dag.dag_id }}');
+            INSERT INTO dag_runs (dt, dag_id) 
+            VALUES ('{{ ds }}', '{{ dag.dag_id }}') 
+            ON CONFLICT (dt, dag_id) DO NOTHING;
+
         """  
     )
     task3 = PostgresOperator(
@@ -39,4 +42,4 @@ with DAG(
             INSERT INTO dag_runs (dt, dag_id) VALUES ('{{ ds }}', '{{ dag.dag_id }}');
         """  
     )
-    task1 >> task2
+    task1 >> task3 >> task2
